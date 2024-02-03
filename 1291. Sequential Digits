@@ -1,0 +1,17 @@
+# Java code for the problem https://leetcode.com/problems/sequential-digits/description/
+class Solution {
+    public List<Integer> sequentialDigits(int low, int high) {
+        List<Integer> result = new ArrayList<>();
+        for(int i=1; i<=9;i++){
+            int s = i;
+            int num =0;
+            while(num<= high && s<=9){
+                num = num*10 +s;
+                if(num >= low && num <= high) result.add(num);;
+                ++s;
+            }          
+        }
+        result.sort(null);
+        return result;
+    }
+}
