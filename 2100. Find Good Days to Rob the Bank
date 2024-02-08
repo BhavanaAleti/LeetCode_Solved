@@ -1,0 +1,32 @@
+# Java Code for https://leetcode.com/problems/find-good-days-to-rob-the-bank
+# Pre process the number of nonIncreasing and nonDecreasing days and then check with given time.
+class Solution {
+    public List<Integer> goodDaysToRobBank(int[] security, int time) {
+        int l = security.length;
+        int[] nonInc = new int[l];
+        for(int i=1; i<l;i++){
+            if(security[i-1] >= security[i]){
+                nonInc[i] = nonInc[i-1] +1;
+            }else {
+                nonInc[i] = 0;
+            }            
+        }
+        
+        int[] nonDec = new int[l];
+        for(int i=l-2; i>0;i--){
+            if(security[i+1] >= security[i]){
+                nonDec[i] = nonDec[i+1] +1;
+            }else {
+                nonDec[i] = 0;
+            }            
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for(int i=0; i<l;i++){
+            if(nonInc[i] >=time && nonDec[i] >= time){
+                result.add(i);
+            }
+        }
+        return result;
+    }
+}
