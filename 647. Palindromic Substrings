@@ -1,0 +1,22 @@
+#Java Solution for https://leetcode.com/problems/palindromic-substrings/description/
+class Solution {
+    int count =0;
+    public int countSubstrings(String s) {
+        if(s.length() ==0 || s == null) return 0;
+
+        for(int i=0; i< s.length(); i++){
+            extendPalindrome(s, i,i); //Checking if palindrome with odd length is possible
+            extendPalindrome(s, i, i+1); //Checking palindrome with even length is possible
+        }
+        return count;
+    }    
+
+        private void extendPalindrome(String s, int left, int right){
+            while(left >=0 && right< s.length() && s.charAt(left)==s.charAt(right)){
+                count++;
+                left--;
+                right++;
+            }
+        }
+    
+}
