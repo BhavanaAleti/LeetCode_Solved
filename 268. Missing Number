@@ -1,0 +1,25 @@
+# Solution to find Missing number in the given range. Problem Link: https://leetcode.com/problems/missing-number/description/
+# Approach 1: Using Bit manipulation. XOR the same number twice will cancel out. so XOR the index and number would give the missing number
+class Solution {
+    public int missingNumber(int[] nums) {
+        int result = nums.length;
+        for(int i=0; i< nums.length; i++){
+            result ^= i;
+            result ^= nums[i];
+        }
+        return result;
+    }
+}
+
+# Approach 2: Using total sum possible and subtracting every number while iterating.
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        if(n==0) return 0;
+        int sum = (n * (n+1))/2;
+        for(int i : nums){
+            sum -= i;
+        }
+        return sum;
+    }
+}
