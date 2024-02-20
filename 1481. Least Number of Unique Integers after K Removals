@@ -1,0 +1,16 @@
+# Problem: https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
+# Approach using Hashmap and Priority queue. Hashmap to maintain the frequencies and then using the priority queue to store the frequencies with minimum at top and pop one by one until k is satisfied.
+class Solution {
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int a : arr){
+            map.put(a, map.getOrDefault(a,0)+1);
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue(map.values());
+        while(k >0){
+            k -= pq.poll();
+        }
+        
+        return  k <0 ? pq.size() +1 : pq.size() ;
+    }
+}
