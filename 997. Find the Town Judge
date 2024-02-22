@@ -1,0 +1,16 @@
+#Soluition for https://leetcode.com/problems/find-the-town-judge/
+# Think as a directed graph and we need to find a node where the indegree is n-1 and there is no outdegree from the node.
+#Use a array for the n people, increase the indegree i.e; number of people trusting them, decrease for the outdegree because they don't trust themselfes.
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+        int[] tCount = new int[n+1];
+        for(int[] t : trust){
+            tCount[t[0]]--;
+            tCount[t[1]]++;
+        }
+        for(int i =1; i< tCount.length; i++){
+            if(tCount[i] ==(n-1)) return i;
+        }
+        return -1;
+    }
+}
