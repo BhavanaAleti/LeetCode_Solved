@@ -1,0 +1,17 @@
+## https://leetcode.com/problems/maximum-odd-binary-number/description/
+class Solution {
+    public String maximumOddBinaryNumber(String s) {
+        int len = s.length();
+        int onesCount =0;
+        for(char ch : s.toCharArray()){
+            if(ch =='1') onesCount++;
+        }
+        
+        StringBuilder maxNum = new StringBuilder();
+        maxNum.append("1".repeat(onesCount -1));
+        maxNum.append("0".repeat(len-onesCount));
+        maxNum.append("1");
+
+        return maxNum.toString();
+    }
+}
