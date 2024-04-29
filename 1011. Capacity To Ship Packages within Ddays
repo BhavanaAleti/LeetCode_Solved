@@ -1,0 +1,36 @@
+//1011. Capacity To Ship Packages within Ddays
+// Use Binary search on the answer, that is capacity to see if it is possible to ship. First set the lower and upper bounds based on the weights in the given input.
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int maxCap =0, maxLoad =0;
+        for(int weight : weights){
+            maxCap += weight;
+            maxLoad = Math.max(maxLoad, weight);
+        }
+
+        int low = maxLoad, high = maxCap;
+        int result =0;
+        while(low <=high){
+           int mid = low + (high-low)/2;
+            if(capacityPossible(mid, days, weights)){
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return low;
+    }
+
+    private boolean capacityPossible(int capacity, int days, int[] weights){
+        int currCap =0;
+        for(int i =0; i< weights.length; i++){
+            if(weights[i] > capacity) return false;
+            if(currCap + weights[i] <= capacity) currCap += weights[i];
+            else {
+                days--;
+                currCap = weights[i];
+            }
+        }
+        return days <= 0 ? false : true;
+    }
+}
